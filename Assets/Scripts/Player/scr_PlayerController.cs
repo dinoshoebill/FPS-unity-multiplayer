@@ -67,31 +67,7 @@ public class scr_PlayerController : MonoBehaviour {
         ApplyGravity();
     }
 
-    private void SetCameraPosition() {
-        if (playerStance == PlayerStance.Crouch) {
-            cameraHolder.transform.localPosition = 
-                Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionCrouch.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
-            controller.height = 
-                Mathf.SmoothDamp(controller.height, stanceCrouch.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
-            controller.center = 
-                Vector3.SmoothDamp(controller.center, stanceCrouch.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
-        } else if (playerStance == PlayerStance.Prone) {
-            cameraHolder.transform.localPosition = 
-                Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionProne.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
-            controller.height = 
-                Mathf.SmoothDamp(controller.height, stanceProne.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
-            controller.center = 
-                Vector3.SmoothDamp(controller.center, stanceProne.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
-        } else {
-            cameraHolder.transform.localPosition = 
-                Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionStand.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
-            controller.height = 
-                Mathf.SmoothDamp(controller.height, stanceStand.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
-            controller.center = 
-                Vector3.SmoothDamp(controller.center, stanceStand.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
-        }
-    }
-
+    #region - View / Movement -
     private void CalculateMovement() {
         speedVector = Vector2.SmoothDamp(speedVector, 
             new Vector2(
@@ -120,6 +96,35 @@ public class scr_PlayerController : MonoBehaviour {
         cameraHolder.localRotation = Quaternion.Euler(cameraRotation);
     }
 
+    private void SetCameraPosition() {
+        if (playerStance == PlayerStance.Crouch) {
+            cameraHolder.transform.localPosition =
+                Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionCrouch.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
+            controller.height =
+                Mathf.SmoothDamp(controller.height, stanceCrouch.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
+            controller.center =
+                Vector3.SmoothDamp(controller.center, stanceCrouch.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
+        }
+        else if (playerStance == PlayerStance.Prone) {
+            cameraHolder.transform.localPosition =
+                Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionProne.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
+            controller.height =
+                Mathf.SmoothDamp(controller.height, stanceProne.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
+            controller.center =
+                Vector3.SmoothDamp(controller.center, stanceProne.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
+        }
+        else {
+            cameraHolder.transform.localPosition =
+                Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionStand.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
+            controller.height =
+                Mathf.SmoothDamp(controller.height, stanceStand.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
+            controller.center =
+                Vector3.SmoothDamp(controller.center, stanceStand.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
+        }
+    }
+    #endregion
+
+    #region - Jump / Gravity -
     private void ApplyGravity() {
         if (controller.isGrounded) {
             jumpingForce = -1f;
@@ -136,7 +141,9 @@ public class scr_PlayerController : MonoBehaviour {
 
         jumpingForce += jumpStrength;
     }
+    #endregion
 
+    #region - Player Stance -
     private void SetPlayerStance(PlayerStance nextPlayerStance) {
         if (nextPlayerStance == PlayerStance.Stand) {
             if (CanChangeStance(stanceStand.stanceCollider.height)) {
@@ -177,7 +184,9 @@ public class scr_PlayerController : MonoBehaviour {
         Vector3 end = new Vector3(feetTransform.position.x, feetTransform.position.y - controller.radius - 0.01f + stanceCheckHeight, feetTransform.position.z);
         return Physics.CheckCapsule(start, end, controller.radius, playerMask);
     }
+    #endregion
 
+    #region - Initializers -
     private void InitializeInputActions() {
         input.Player.Movement.performed += e => {
             inputMovement = e.ReadValue<Vector2>();
@@ -243,6 +252,7 @@ public class scr_PlayerController : MonoBehaviour {
 
         SetPlayerStance(PlayerStance.Stand);
     }
+    #endregion
 
     #region - Sprinting -
     private void StopSprinting() {

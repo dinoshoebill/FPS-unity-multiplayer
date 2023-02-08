@@ -6,7 +6,6 @@ using System;
 public static class scr_Models {
 
     #region - Player -
-
     public enum PlayerStance {
         Stand,
         Crouch,
@@ -62,8 +61,6 @@ public static class scr_Models {
 
         [Header("Weapon Sway")]
         public float swayAmount;
-        public bool swayXInverted;
-        public bool swayYInverted;
         public float swayClampX;
         public float swayClampY;
         public float swayClampZ;
@@ -77,8 +74,6 @@ public static class scr_Models {
 
         [Header("Weapon Smoothing")]
         public float swaySmoothing;
-        public float swayResetSmoothing;
-        public float weaponSprintResetSmoothing;
 
         [Header("Multipliers")]
         public float animationSpeedMultiplier;
