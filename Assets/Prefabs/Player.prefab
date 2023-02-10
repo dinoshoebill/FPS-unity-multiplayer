@@ -93,7 +93,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -255,8 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ccffc3998fa43d44b31f561e92688c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputMovement: {x: 0, y: 0}
-  inputView: {x: 0, y: 0}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   isSprinting: 0
   wantsSprinting: 0
   feetTransform: {fileID: 8575633877760257827}

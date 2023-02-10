@@ -1,16 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using static scr_Models;
 
-public class scr_PlayerController : MonoBehaviour {
+public class scr_PlayerController : NetworkBehaviour {
 
     private CharacterController controller;
     private PlayerInput input;
 
-    public Vector2 inputMovement;
-    public Vector2 inputView;
+    private Vector2 inputMovement;
+    private Vector2 inputView;
 
     private Vector3 cameraRotation;
     private Vector3 playerRotation;
@@ -78,7 +76,6 @@ public class scr_PlayerController : MonoBehaviour {
 
         Vector3 newPlayerMovement = new Vector3(speedVector.y, jumpingForce * Time.deltaTime, speedVector.x);
         newPlayerMovement = transform.TransformDirection(newPlayerMovement);
-
         controller.Move(newPlayerMovement);
     }
 
@@ -149,13 +146,11 @@ public class scr_PlayerController : MonoBehaviour {
             if (CanChangeStance(stanceStand.stanceCollider.height)) {
                 return;
             }
-        }
-        else if (nextPlayerStance == PlayerStance.Crouch) {
+        } else if (nextPlayerStance == PlayerStance.Crouch) {
             if (nextPlayerStance.CompareTo(playerStance) == 0) {
                 if (CanChangeStance(stanceStand.stanceCollider.height)) {
                     return;
-                }
-                else {
+                } else {
                     nextPlayerStance = PlayerStance.Stand;
                 }
             } else if (CanChangeStance(stanceCrouch.stanceCollider.height) || !controller.isGrounded) {
@@ -163,6 +158,7 @@ public class scr_PlayerController : MonoBehaviour {
             }
         }
 
+        Debug.Log("executed");
         playerStance = nextPlayerStance;
         SetPlayerSpeed(playerStance);
     }
@@ -177,6 +173,8 @@ public class scr_PlayerController : MonoBehaviour {
             speed = settings.speedCrouch;
         else if (newPlayerStance == PlayerStance.Prone)
             speed = settings.speedProne;
+
+        Debug.Log("called");
     }
 
     private bool CanChangeStance(float stanceCheckHeight) {
