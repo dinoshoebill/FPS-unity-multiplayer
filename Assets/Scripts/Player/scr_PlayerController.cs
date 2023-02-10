@@ -158,7 +158,6 @@ public class scr_PlayerController : NetworkBehaviour {
             }
         }
 
-        Debug.Log("executed");
         playerStance = nextPlayerStance;
         SetPlayerSpeed(playerStance);
     }
@@ -174,7 +173,6 @@ public class scr_PlayerController : NetworkBehaviour {
         else if (newPlayerStance == PlayerStance.Prone)
             speed = settings.speedProne;
 
-        Debug.Log("called");
     }
 
     private bool CanChangeStance(float stanceCheckHeight) {
