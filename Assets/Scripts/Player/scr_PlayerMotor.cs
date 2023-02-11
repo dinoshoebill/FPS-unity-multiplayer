@@ -8,7 +8,9 @@ public class scr_PlayerMotor : MonoBehaviour {
     #region - Variables -
     private CharacterController controller;
 
+    [HideInInspector]
     public Vector2 inputMovement;
+    [HideInInspector]
     public Vector2 inputView;
 
     private Vector3 cameraRotation;
@@ -19,8 +21,7 @@ public class scr_PlayerMotor : MonoBehaviour {
 
     [HideInInspector]
     public bool isSprinting;
-    [HideInInspector]
-    public bool wantsSprinting;
+    private bool wantsSprinting;
     private float jumpingForce;
     private float speed;
 
@@ -48,6 +49,15 @@ public class scr_PlayerMotor : MonoBehaviour {
     public PlayerStanceCollider stanceStand;
     public PlayerStanceCollider stanceCrouch;
     public PlayerStanceCollider stanceProne;
+
+    [Header("Player Graphics")]
+    public Transform positionGraphicsStand;
+    public Transform positionGraphicsCrouch;
+    public Transform positionGraphicsProne;
+    public Transform upperSphere;
+    public Transform cylinder;
+    private Vector3 cylinderGraphicsVelocity;
+    private Vector3 cylinderScaleVelocity;
     #endregion
 
     #region - Awake / Update -
@@ -60,7 +70,7 @@ public class scr_PlayerMotor : MonoBehaviour {
     private void Update() {
         CalculateView();
         CalculateMovement();
-        SetCameraPosition();
+        PositionCameraAndGFX();
         ApplyGravity();
     }
 
@@ -91,7 +101,6 @@ public class scr_PlayerMotor : MonoBehaviour {
     }
 
     private void CalculateView() {
-
         playerRotation.y += settings.viewXSensitivity * inputView.x * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(playerRotation);
 
@@ -104,30 +113,43 @@ public class scr_PlayerMotor : MonoBehaviour {
         cameraHolder.localRotation = Quaternion.Euler(cameraRotation);
     }
 
-    private void SetCameraPosition() {
+    private void PositionCameraAndGFX() {
         if (playerStance == PlayerStance.Crouch) {
-            cameraHolder.transform.localPosition =
-                Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionCrouch.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
+
+            cameraHolder.localPosition =
+            Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionCrouch.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
+            upperSphere.localPosition = cameraHolder.localPosition;
             controller.height =
                 Mathf.SmoothDamp(controller.height, stanceCrouch.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
             controller.center =
                 Vector3.SmoothDamp(controller.center, stanceCrouch.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
-        }
-        else if (playerStance == PlayerStance.Prone) {
-            cameraHolder.transform.localPosition =
+
+            cylinder.localPosition = Vector3.SmoothDamp(cylinder.localPosition, positionGraphicsCrouch.localPosition, ref cylinderGraphicsVelocity, settings.stanceSmoothing * Time.deltaTime);
+            cylinder.localScale = Vector3.SmoothDamp(cylinder.localScale, new Vector3(1, 0.25f, 1), ref cylinderScaleVelocity,settings.stanceSmoothing * Time.deltaTime);
+        } else if (playerStance == PlayerStance.Prone) {
+
+            cameraHolder.localPosition =
                 Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionProne.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
+            upperSphere.localPosition = cameraHolder.localPosition;
             controller.height =
                 Mathf.SmoothDamp(controller.height, stanceProne.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
             controller.center =
                 Vector3.SmoothDamp(controller.center, stanceProne.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
-        }
-        else {
-            cameraHolder.transform.localPosition =
+
+            cylinder.localPosition = Vector3.SmoothDamp(cylinder.localPosition, positionGraphicsProne.localPosition, ref cylinderGraphicsVelocity, settings.stanceSmoothing * Time.deltaTime);
+            cylinder.localScale = Vector3.SmoothDamp(cylinder.localScale, new Vector3(1, 0, 1), ref cylinderScaleVelocity,settings.stanceSmoothing * Time.deltaTime);
+        } else {
+
+            cameraHolder.localPosition =
                 Vector3.SmoothDamp(cameraHolder.transform.localPosition, positionStand.transform.localPosition, ref playerCameraVelocity, settings.stanceSmoothing * Time.deltaTime);
+            upperSphere.localPosition = cameraHolder.localPosition;
             controller.height =
                 Mathf.SmoothDamp(controller.height, stanceStand.stanceCollider.height, ref stanceVelocityFloat, settings.stanceSmoothing * Time.deltaTime);
             controller.center =
                 Vector3.SmoothDamp(controller.center, stanceStand.stanceCollider.center, ref stanceVelocityVector, settings.stanceSmoothing * Time.deltaTime);
+
+            cylinder.localPosition = Vector3.SmoothDamp(cylinder.localPosition, positionGraphicsStand.localPosition, ref cylinderGraphicsVelocity, settings.stanceSmoothing * Time.deltaTime);
+            cylinder.localScale = Vector3.SmoothDamp(cylinder.localScale, new Vector3(1, 0.5f, 1), ref cylinderScaleVelocity,settings.stanceSmoothing * Time.deltaTime);
         }
     }
     #endregion
