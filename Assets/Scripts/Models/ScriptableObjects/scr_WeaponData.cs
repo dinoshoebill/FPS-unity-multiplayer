@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Gun", menuName = "Weapon/Gun")]
-public class scr_GunData : ScriptableObject {
+public class scr_WeaponData : ScriptableObject {
 
     [Header("Gun Info")]
     public string gunName;

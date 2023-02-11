@@ -5,6 +5,7 @@ using static scr_Settings;
 
 public class scr_PlayerMotor : MonoBehaviour {
 
+    #region - Variables -
     private CharacterController controller;
 
     public Vector2 inputMovement;
@@ -25,7 +26,9 @@ public class scr_PlayerMotor : MonoBehaviour {
 
     private float stanceVelocityFloat;
     private Vector3 stanceVelocityVector;
+    #endregion
 
+    #region - Headers -
     [Header("Preferences")]
     public Transform feetTransform;
     public Transform cameraHolder;
@@ -45,11 +48,14 @@ public class scr_PlayerMotor : MonoBehaviour {
     public PlayerStanceCollider stanceStand;
     public PlayerStanceCollider stanceCrouch;
     public PlayerStanceCollider stanceProne;
+    #endregion
 
+    #region - Awake / Update -
     private void Awake() {
         controller = GetComponent<CharacterController>();
         InitializePlayerSettings();
     }
+    #endregion
 
     private void Update() {
         CalculateView();
