@@ -200,18 +200,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             ""id"": ""72f5a5f8-4397-4cb5-aae7-b808edacebe2"",
             ""actions"": [
                 {
-                    ""name"": ""FirePressed"",
+                    ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""14e2b8be-26ae-4e9b-88f2-47f7d3e69c61"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""FireReleased"",
-                    ""type"": ""Button"",
-                    ""id"": ""8723d40d-f599-414e-aa37-39c0a44a1247"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -222,22 +213,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a2046029-e316-42b0-9854-6d0f155e45fc"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": ""Press"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""FirePressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f15652ed-f308-4f2a-9955-fd2f46297ad8"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FireReleased"",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -256,8 +236,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Sprinting = m_Player.FindAction("Sprinting", throwIfNotFound: true);
         // Weapon
         m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
-        m_Weapon_FirePressed = m_Weapon.FindAction("FirePressed", throwIfNotFound: true);
-        m_Weapon_FireReleased = m_Weapon.FindAction("FireReleased", throwIfNotFound: true);
+        m_Weapon_Fire = m_Weapon.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -390,14 +369,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     // Weapon
     private readonly InputActionMap m_Weapon;
     private IWeaponActions m_WeaponActionsCallbackInterface;
-    private readonly InputAction m_Weapon_FirePressed;
-    private readonly InputAction m_Weapon_FireReleased;
+    private readonly InputAction m_Weapon_Fire;
     public struct WeaponActions
     {
         private @PlayerInput m_Wrapper;
         public WeaponActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @FirePressed => m_Wrapper.m_Weapon_FirePressed;
-        public InputAction @FireReleased => m_Wrapper.m_Weapon_FireReleased;
+        public InputAction @Fire => m_Wrapper.m_Weapon_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -407,22 +384,16 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_WeaponActionsCallbackInterface != null)
             {
-                @FirePressed.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFirePressed;
-                @FirePressed.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFirePressed;
-                @FirePressed.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFirePressed;
-                @FireReleased.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireReleased;
-                @FireReleased.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireReleased;
-                @FireReleased.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireReleased;
+                @Fire.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_WeaponActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @FirePressed.started += instance.OnFirePressed;
-                @FirePressed.performed += instance.OnFirePressed;
-                @FirePressed.canceled += instance.OnFirePressed;
-                @FireReleased.started += instance.OnFireReleased;
-                @FireReleased.performed += instance.OnFireReleased;
-                @FireReleased.canceled += instance.OnFireReleased;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -438,7 +409,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     }
     public interface IWeaponActions
     {
-        void OnFirePressed(InputAction.CallbackContext context);
-        void OnFireReleased(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

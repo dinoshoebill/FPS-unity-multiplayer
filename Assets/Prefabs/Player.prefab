@@ -317,6 +317,7 @@ MonoBehaviour:
   - {fileID: 8575633875941322851}
   - {fileID: 8575633875941322850}
   sceneCamera: {fileID: 0}
+  remotePayerLayer: RemotePlayer
 --- !u!143 &8575633876364303561
 CharacterController:
   m_ObjectHideFlags: 0
@@ -525,7 +526,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8575633877115247076}
   m_Layer: 6
-  m_Name: WeaponAnimation
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

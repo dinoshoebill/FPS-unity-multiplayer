@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public static class scr_Models {
+public static class scr_Settings {
 
     #region - Player -
     public enum PlayerStance {
@@ -51,11 +49,9 @@ public static class scr_Models {
     public class PlayerStanceCollider {
         public CapsuleCollider stanceCollider;
     }
-
     #endregion
 
     #region - Weapons -
-    
     [Serializable]
     public class WeaponsSettingsModel {
 
@@ -77,9 +73,7 @@ public static class scr_Models {
 
         [Header("Multipliers")]
         public float animationSpeedMultiplier;
-
     }
-    
     #endregion
 
 }

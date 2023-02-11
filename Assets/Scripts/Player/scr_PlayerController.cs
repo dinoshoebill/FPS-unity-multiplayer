@@ -1,6 +1,6 @@
 using Mirror;
 using UnityEngine;
-using static scr_Models;
+using static scr_Settings;
 
 public class scr_PlayerController : NetworkBehaviour {
 
@@ -210,6 +210,8 @@ public class scr_PlayerController : NetworkBehaviour {
         input.Player.Sprinting.started += e => WantsSprinting();
 
         input.Player.Sprinting.performed += e => StopSprinting();
+
+        input.Weapon.Fire.performed += e => Debug.Log(e);
     }
     private void InitializePlayerSettings() {
 
