@@ -4,12 +4,6 @@ using System;
 public static class scr_Settings {
 
     #region - Player -
-    public enum PlayerStance {
-        Stand,
-        Crouch,
-        Prone
-    }
-
     [Serializable]
     public class PlayerSettingsModel {
 
@@ -18,18 +12,13 @@ public static class scr_Settings {
         public float viewYSensitivity;
         public float viewClampYMin;
         public float viewClampYMax;
-        public float viewProneClampYMin;
-        public float viewProneClampYMax;
 
         [Header("Movement Settings")]
         public float speedSprint;
         public float speedStand;
-        public float speedProne;
-        public float speedCrouch;
 
         [Header("Movement Smoothing")]
         public float movementSmoothing;
-        public float stanceSmoothing;
         public float airTimeSmoothing;
 
         [Header("Jump Settings")]
@@ -43,11 +32,6 @@ public static class scr_Settings {
         public float speedStrafeSprintMultiplier;
         public float gravityMultiplier;
         public float doubleJumpMultiplier;
-    }
-
-    [Serializable]
-    public class PlayerStanceCollider {
-        public CapsuleCollider stanceCollider;
     }
     #endregion
 

@@ -23,12 +23,9 @@ public class scr_PlayerController : NetworkBehaviour {
 
         input.Player.Jump.performed += e => motor.JumpInput(e);
 
-        input.Player.Crouch.performed += e => motor.SetPlayerStance(PlayerStance.Crouch);
-        input.Player.Prone.performed += e => motor.SetPlayerStance(PlayerStance.Prone);
+        input.Player.Sprinting.started += e => motor.StartSprinting();
 
-        input.Player.Sprinting.started += e => motor.WantsSprinting();
-
-        input.Player.Sprinting.performed += e => motor.StopSprinting();
+        input.Player.Sprinting.performed += e => motor.StopSprintingByRelease();
 
         input.Weapon.Fire.performed += e => Debug.Log(e);
     }
