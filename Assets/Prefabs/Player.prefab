@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: -5987551171012143108}
   - component: {fileID: -3841727026956562012}
   - component: {fileID: 8492157771987007440}
+  - component: {fileID: 1326436557205562867}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -260,43 +261,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  isSprinting: 0
-  wantsSprinting: 0
-  feetTransform: {fileID: 8575633877760257827}
-  cameraHolder: {fileID: 8575633876723291426}
-  settings:
-    viewXSensitivity: 0
-    viewYSensitivity: 0
-    viewClampYMin: 0
-    viewClampYMax: 0
-    viewProneClampYMin: 0
-    viewProneClampYMax: 0
-    speedSprint: 0
-    speedStand: 0
-    speedProne: 0
-    speedCrouch: 0
-    movementSmoothing: 0
-    stanceSmoothing: 0
-    airTimeSmoothing: 0
-    jumpPower: 0
-    gravity: 0
-    speedStrafeMultiplier: 0
-    speedStrafeSprintMultiplier: 0
-    gravityMultiplier: 0
-    doubleJumpMultiplier: 0
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 55
-  playerStance: 0
-  positionStand: {fileID: 8575633876480911692}
-  positionCrouch: {fileID: 8575633877247640980}
-  positionProne: {fileID: 8575633877591729829}
-  stanceStand:
-    stanceCollider: {fileID: 8575633876364303564}
-  stanceCrouch:
-    stanceCollider: {fileID: 8575633876364303563}
-  stanceProne:
-    stanceCollider: {fileID: 8575633876364303562}
 --- !u!114 &-7307926584251758987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +416,57 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!114 &1326436557205562867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575633876364303555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31dccbbf4cd95f4782a28d661d5b506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputMovement: {x: 0, y: 0}
+  inputView: {x: 0, y: 0}
+  isSprinting: 0
+  wantsSprinting: 0
+  feetTransform: {fileID: 8575633877760257827}
+  cameraHolder: {fileID: 8575633876723291426}
+  settings:
+    viewXSensitivity: 0
+    viewYSensitivity: 0
+    viewClampYMin: 0
+    viewClampYMax: 0
+    viewProneClampYMin: 0
+    viewProneClampYMax: 0
+    speedSprint: 0
+    speedStand: 0
+    speedProne: 0
+    speedCrouch: 0
+    movementSmoothing: 0
+    stanceSmoothing: 0
+    airTimeSmoothing: 0
+    jumpPower: 0
+    gravity: 0
+    speedStrafeMultiplier: 0
+    speedStrafeSprintMultiplier: 0
+    gravityMultiplier: 0
+    doubleJumpMultiplier: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 183
+  playerStance: 0
+  positionStand: {fileID: 8575633876480911692}
+  positionCrouch: {fileID: 8575633877247640980}
+  positionProne: {fileID: 8575633877591729829}
+  stanceStand:
+    stanceCollider: {fileID: 8575633876364303564}
+  stanceCrouch:
+    stanceCollider: {fileID: 8575633876364303563}
+  stanceProne:
+    stanceCollider: {fileID: 8575633876364303562}
 --- !u!1 &8575633876480911691
 GameObject:
   m_ObjectHideFlags: 0
