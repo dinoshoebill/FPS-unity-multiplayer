@@ -1,8 +1,6 @@
-using Mirror;
 using UnityEngine;
-using static scr_Settings;
 
-public class scr_PlayerController : NetworkBehaviour {
+public class scr_PlayerController : MonoBehaviour {
 
     private PlayerInput input;
     private scr_PlayerMotor motor;
