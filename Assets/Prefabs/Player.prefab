@@ -513,6 +513,7 @@ MonoBehaviour:
   - {fileID: 1326436557205562867}
   - {fileID: 8575633875941322851}
   - {fileID: 8575633875941322850}
+  - {fileID: 7010017629461651935}
   sceneCamera: {fileID: 0}
   remotePayerLayer: RemotePlayer
 --- !u!143 &8575633876364303561
@@ -580,7 +581,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   target: {fileID: 8575633876364303557}
-  clientAuthority: 1
+  clientAuthority: 0
   syncPosition: 1
   syncRotation: 1
   syncScale: 0
@@ -609,7 +610,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   target: {fileID: 8575633876723291426}
-  clientAuthority: 1
+  clientAuthority: 0
   syncPosition: 1
   syncRotation: 1
   syncScale: 0

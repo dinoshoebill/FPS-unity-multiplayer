@@ -12,16 +12,25 @@ public class scr_NetworkBehaviour : NetworkBehaviour {
     private string remotePayerLayer = "RemotePlayer";
 
     private void Start() {
+
+        sceneCamera = Camera.main;
+
         if (!isLocalPlayer) {
             DisableComponents();
             AssignRemoteLayer();
         } else {
             DisableSceneCamera();
         }
+
+        RegisterPlayer();
+    }
+
+    public void RegisterPlayer() {
+        string id = "Player " + GetComponent<NetworkIdentity>().netId;
+        transform.name = id;
     }
 
     private void DisableSceneCamera() {
-        sceneCamera = Camera.main;
         if (sceneCamera != null) {
             sceneCamera.gameObject.SetActive(false);
         }
