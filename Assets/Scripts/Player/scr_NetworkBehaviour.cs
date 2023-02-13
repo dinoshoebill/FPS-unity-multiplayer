@@ -1,11 +1,12 @@
 using UnityEngine;
 using Mirror;
 
+[RequireComponent(typeof(scr_Player))]
 public class scr_NetworkBehaviour : NetworkBehaviour {
 
     [SerializeField]
     private Behaviour[] componentsToDisable;
-    [SerializeField]
+
     private Camera sceneCamera;
 
     [SerializeField]
@@ -21,13 +22,15 @@ public class scr_NetworkBehaviour : NetworkBehaviour {
         } else {
             DisableSceneCamera();
         }
-
-        RegisterPlayer();
     }
 
-    public void RegisterPlayer() {
-        string id = "Player " + GetComponent<NetworkIdentity>().netId;
-        transform.name = id;
+    public override void OnStartClient() {
+        base.OnStartClient();
+
+        string id = GetComponent<NetworkIdentity>().netId.ToString();
+        scr_Player player = GetComponent<scr_Player>();
+
+        scr_GameManager.RegisterPlayer(id, player);
     }
 
     private void DisableSceneCamera() {
@@ -48,5 +51,7 @@ public class scr_NetworkBehaviour : NetworkBehaviour {
     private void OnDisable() {
         if (sceneCamera != null)
             sceneCamera.gameObject.SetActive(true);
+
+        scr_GameManager.UnregisterPlayer(transform.name);
     }
 }

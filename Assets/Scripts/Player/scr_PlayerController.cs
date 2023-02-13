@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(scr_PlayerMotor))]
+[RequireComponent(typeof(scr_PlayerShoot))]
 public class scr_PlayerController : MonoBehaviour {
 
     private PlayerInput input;

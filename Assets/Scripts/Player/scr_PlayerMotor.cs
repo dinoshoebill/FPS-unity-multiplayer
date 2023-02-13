@@ -1,10 +1,11 @@
 using UnityEngine;
 using static scr_Settings;
 
+[RequireComponent(typeof(CharacterController))]
 public class scr_PlayerMotor : MonoBehaviour {
 
     #region - Variables -
-    private CharacterController controller;
+    private CharacterController player;
 
     [HideInInspector]
     public Vector2 inputMovement;
@@ -38,7 +39,7 @@ public class scr_PlayerMotor : MonoBehaviour {
 
     #region - Awake / Update -
     private void Awake() {
-        controller = GetComponent<CharacterController>();
+        player = GetComponent<CharacterController>();
         InitializePlayerSettings();
     }
     #endregion
@@ -73,11 +74,11 @@ public class scr_PlayerMotor : MonoBehaviour {
             speed * inputMovement.y * Time.deltaTime,
             speed * (isSprinting ? settings.speedStrafeSprintMultiplier : settings.speedStrafeMultiplier) * inputMovement.x * Time.deltaTime),
         ref speedVelocity,
-        settings.movementSmoothing, controller.isGrounded ? settings.movementSmoothing : settings.airTimeSmoothing);
+        settings.movementSmoothing, player.isGrounded ? settings.movementSmoothing : settings.airTimeSmoothing);
 
         Vector3 newPlayerMovement = new Vector3(speedVector.y, jumpingForce * Time.deltaTime, speedVector.x);
         newPlayerMovement = transform.TransformDirection(newPlayerMovement);
-        controller.Move(newPlayerMovement);
+        player.Move(newPlayerMovement);
     }
 
     private void CalculateView() {
@@ -100,7 +101,7 @@ public class scr_PlayerMotor : MonoBehaviour {
     }
 
     private void ApplyGravity() {
-        if (controller.isGrounded) {
+        if (player.isGrounded) {
             jumpingForce = -1f;
         }
         else {
@@ -110,7 +111,7 @@ public class scr_PlayerMotor : MonoBehaviour {
 
     private void Jump(float jumpStrength) {
 
-        if (!controller.isGrounded) {
+        if (!player.isGrounded) {
             return;
         }
 

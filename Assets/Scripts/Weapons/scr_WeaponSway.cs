@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class scr_WeaponSway : MonoBehaviour {
@@ -22,17 +20,16 @@ public class scr_WeaponSway : MonoBehaviour {
     private Vector3 targetWeaponMovementRotation;
     private Vector3 targetWeaponMovementRotationVelocity;
 
-    private Vector3 swayPosition;
-    private float swayTime;
     private float swaySmoothing;
     private float swayResetSmoothing;
-    private float swayAmountA;
-    private float swayAmountB;
-    private float swayScale;
-    private float swayLerpSpeed;
-    private float swayClampX;
-    private float swayClampY;
-    private float swayClampZ;
+
+    public float swayAmountA;
+    public float swayAmountB;
+    public float swayScale;
+    public float swayLerpSpeed;
+    public float swayClampX;
+    public float swayClampY;
+    public float swayClampZ;
 
     private void Awake() {
         InitializeWeaponSettings();
@@ -56,7 +53,7 @@ public class scr_WeaponSway : MonoBehaviour {
         combinedWeaponRotation.x = Mathf.Clamp(combinedWeaponRotation.x, -swayClampX, swayClampX);
         combinedWeaponRotation.y = Mathf.Clamp(combinedWeaponRotation.y, -swayClampY, swayClampY);
         combinedWeaponRotation.z = Mathf.Clamp(combinedWeaponRotation.z, -swayClampZ, swayClampZ);
-        transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
+        transform.localRotation = Quaternion.Euler(combinedWeaponRotation);
     }
 
     private void InitializeWeaponSettings() {
@@ -70,30 +67,5 @@ public class scr_WeaponSway : MonoBehaviour {
 
         swaySmoothing = 0.1f;
         swayResetSmoothing = 0.1f;
-
-        swayScale = 400;
-        swayAmountA = 1;
-        swayAmountB = 2;
-        swayLerpSpeed = 1;
-
-        swayTime = 0;
-    }
-
-    private void CalculateWeaponSway() {
-        Vector3 targetPosition = LissajousCurve(swayTime, swayAmountA, swayAmountB) / swayScale;
-        swayPosition = Vector3.Lerp(swayPosition, targetPosition, Time.smoothDeltaTime * swayLerpSpeed);
-
-        swayTime += Time.deltaTime;
-
-        if (swayTime > 6.5f) {
-            swayTime = 0;
-        }
-
-
-        this.transform.localRotation = Quaternion.Euler(swayPosition);
-    }
-
-    private Vector3 LissajousCurve(float Time, float A, float B) {
-        return new Vector3(Mathf.Sin(Time), A * Mathf.Sin(B * Time * Mathf.PI));
     }
 }

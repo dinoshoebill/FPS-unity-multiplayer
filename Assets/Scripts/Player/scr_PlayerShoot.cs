@@ -11,16 +11,13 @@ public class scr_PlayerShoot : NetworkBehaviour {
     public LayerMask mask;
 
     [SerializeField]
-    private Camera cam;
-
-    [SerializeField]
-    private Transform barrelEnd;
+    private Transform barrel;
 
     [SerializeField]
     private scr_WeaponSway weaponSway;
 
     private void Start() {
-        if (cam == null) {
+        if (barrel == null) {
             this.enabled = false;
         }
     }
@@ -31,9 +28,9 @@ public class scr_PlayerShoot : NetworkBehaviour {
 
         Debug.Log("Shooting");
 
-        barrelEnd.localRotation = weaponSway.transform.localRotation;
+        barrel.localRotation = weaponSway.transform.localRotation;
 
-        if (Physics.Raycast(barrelEnd.position, barrelEnd.forward, out ray, weapon.range, mask)) {
+        if (Physics.Raycast(barrel.position, barrel.forward, out ray, weapon.range, mask)) {
             if (ray.collider.tag == PLAYER_TAG) {
                 CmdPlayerShot(ray.collider.name);
             }
