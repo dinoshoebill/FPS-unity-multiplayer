@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abbdc33d39681f748b34b71e1b4596c2, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  gunName: 
+  gunName: Pistol
   damage: 13
-  maxDistance: 1000
+  range: 100
   magazineSize: 13
   fireRate: 200
   reloadTime: 1.2

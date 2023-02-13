@@ -8,7 +8,7 @@ public class scr_WeaponData : ScriptableObject {
 
     [Header("Shooting")]
     public float damage;
-    public float maxDistance;
+    public float range;
 
     [Header("Ammo")]
     public int magazineSize;

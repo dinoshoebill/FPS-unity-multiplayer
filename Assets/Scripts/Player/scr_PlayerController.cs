@@ -10,6 +10,7 @@ public class scr_PlayerController : MonoBehaviour {
 
         input = new PlayerInput();
         motor = GetComponent<scr_PlayerMotor>();
+        shoot = GetComponent<scr_PlayerShoot>();
 
         InitializeInputActions();
         input.Enable();

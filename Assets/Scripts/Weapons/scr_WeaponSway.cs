@@ -90,7 +90,7 @@ public class scr_WeaponSway : MonoBehaviour {
         }
 
 
-        this.transform.localPosition = swayPosition;
+        this.transform.localRotation = Quaternion.Euler(swayPosition);
     }
 
     private Vector3 LissajousCurve(float Time, float A, float B) {

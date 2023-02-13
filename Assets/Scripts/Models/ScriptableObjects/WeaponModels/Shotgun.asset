@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Shotgun
   damage: 50
-  maxDistance: 100
+  range: 100
   magazineSize: 8
   fireRate: 75
   reloadTime: 2
