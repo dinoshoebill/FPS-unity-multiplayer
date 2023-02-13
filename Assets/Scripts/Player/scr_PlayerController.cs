@@ -4,6 +4,7 @@ public class scr_PlayerController : MonoBehaviour {
 
     private PlayerInput input;
     private scr_PlayerMotor motor;
+    private scr_PlayerShoot shoot;
 
     private void Awake() {
 
@@ -25,6 +26,6 @@ public class scr_PlayerController : MonoBehaviour {
 
         input.Player.Sprinting.performed += e => motor.StopSprintingByRelease();
 
-        input.Weapon.Fire.performed += e => Debug.Log(e);
+        input.Weapon.Fire.performed += e => shoot.Shoot();
     }
 }

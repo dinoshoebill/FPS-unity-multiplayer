@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class scr_PlayerShoot : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class scr_PlayerShoot : NetworkBehaviour {
+
+    public scr_PlayerWeapon weapon;
+
+    [SerializeField]
+    private Camera camera;
+
+    private void Start() {
+        if (camera == null) {
+            this.enabled = false;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Shoot() {
+
     }
 }
