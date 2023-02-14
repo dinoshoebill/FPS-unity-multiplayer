@@ -22,15 +22,15 @@ public class scr_GameManager : MonoBehaviour {
         return players[id];
     }
 
-    private void OnGUI() {
-        GUILayout.BeginArea(new Rect(200, 200, 200, 500));
-        GUILayout.BeginVertical();
+    //private void OnGUI() {
+    //    GUILayout.BeginArea(new Rect(200, 200, 200, 500));
+    //    GUILayout.BeginVertical();
 
-        foreach(string id in players.Keys) {
-            GUILayout.Label(id + "   -   " + players[id].transform.name);
-        }
+    //    foreach(string id in players.Keys) {
+    //        GUILayout.Label(id + "   -   " + players[id].transform.name);
+    //    }
 
-        GUILayout.EndVertical();
-        GUILayout.EndArea();
-    }
+    //    GUILayout.EndVertical();
+    //    GUILayout.EndArea();
+    //}
 }

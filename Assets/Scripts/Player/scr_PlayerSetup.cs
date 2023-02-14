@@ -2,7 +2,7 @@ using UnityEngine;
 using Mirror;
 
 [RequireComponent(typeof(scr_Player))]
-public class scr_NetworkBehaviour : NetworkBehaviour {
+public class scr_PlayerSetup : NetworkBehaviour {
 
     [SerializeField]
     private Behaviour[] componentsToDisable;

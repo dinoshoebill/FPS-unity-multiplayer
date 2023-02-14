@@ -29,6 +29,6 @@ public class scr_PlayerController : MonoBehaviour {
 
         input.Player.Sprinting.performed += e => motor.StopSprintingByRelease();
 
-        input.Weapon.Fire.performed += e => shoot.Shoot();
+        input.Weapon.Fire.started += e => shoot.Shoot();
     }
 }

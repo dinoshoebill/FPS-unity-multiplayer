@@ -32,13 +32,16 @@ public class scr_PlayerShoot : NetworkBehaviour {
 
         if (Physics.Raycast(barrel.position, barrel.forward, out ray, weapon.range, mask)) {
             if (ray.collider.tag == PLAYER_TAG) {
-                CmdPlayerShot(ray.collider.name);
+                CmdPlayerShot(ray.collider.name, weapon.damage);
             }
         }
     }
 
     [Command]
-    private void CmdPlayerShot(string id) {
+    private void CmdPlayerShot(string id, int damage) {
         Debug.Log("Player " + id + " has been hit");
+
+        scr_Player player = scr_GameManager.GetPlayer(id);
+        player.TakeDamage(damage);
     }
 }

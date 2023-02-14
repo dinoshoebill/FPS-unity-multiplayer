@@ -7,7 +7,7 @@ public class scr_WeaponData : ScriptableObject {
     public string gunName;
 
     [Header("Shooting")]
-    public float damage;
+    public int damage;
     public float range;
 
     [Header("Ammo")]
