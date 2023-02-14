@@ -42,6 +42,6 @@ public class scr_PlayerShoot : NetworkBehaviour {
         Debug.Log("Player " + id + " has been hit");
 
         scr_Player player = scr_GameManager.GetPlayer(id);
-        player.TakeDamage(damage);
+        player.RpcTakeDamage(damage);
     }
 }

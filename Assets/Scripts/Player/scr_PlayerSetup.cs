@@ -22,6 +22,8 @@ public class scr_PlayerSetup : NetworkBehaviour {
         } else {
             DisableSceneCamera();
         }
+
+        GetComponent<scr_Player>().Setup();
     }
 
     public override void OnStartClient() {

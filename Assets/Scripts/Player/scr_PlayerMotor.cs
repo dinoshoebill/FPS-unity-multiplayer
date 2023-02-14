@@ -128,7 +128,7 @@ public class scr_PlayerMotor : MonoBehaviour {
         settings.viewXSensitivity = 12;
         settings.viewYSensitivity = 12;
 
-        settings.speedSprint = 10;
+        settings.speedSprint = 12;
         settings.speedStand = 7;
 
         settings.viewClampYMin = -70;
@@ -175,4 +175,9 @@ public class scr_PlayerMotor : MonoBehaviour {
         }
     }
     #endregion
+
+    private void OnEnable() {
+        jumpingForce = -1f;
+        player.Move(Vector3.zero);
+    }
 }

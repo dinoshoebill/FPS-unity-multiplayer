@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class scr_GameManager : MonoBehaviour {
 
+    public static scr_GameManager instance;
+    public scr_MatchSettings matchSettings;
+
+    private void Awake() {
+        if (instance != null) {
+            Debug.LogError("More than 1 instance of game manager is running");
+        } else {
+            instance = this;
+        }
+    }
+
     private const string PLAYER_ID_PREFIX = "P";
 
     private static Dictionary<string, scr_Player> players = new Dictionary<string, scr_Player>();
@@ -33,4 +44,5 @@ public class scr_GameManager : MonoBehaviour {
     //    GUILayout.EndVertical();
     //    GUILayout.EndArea();
     //}
+
 }
