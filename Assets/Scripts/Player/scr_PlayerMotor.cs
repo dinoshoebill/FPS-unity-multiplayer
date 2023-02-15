@@ -5,7 +5,7 @@ using static scr_Settings;
 public class scr_PlayerMotor : MonoBehaviour {
 
     #region - Variables -
-    private CharacterController player;
+    public CharacterController player;
 
     [HideInInspector]
     public Vector2 inputMovement;

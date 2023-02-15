@@ -4,8 +4,7 @@ using System.Collections;
 
 public class scr_Player : NetworkBehaviour {
 
-    [SyncVar]
-    private bool isDead = false;
+    private PlayerInput input;
 
     [SerializeField]
     private int maxHealth = 100;
@@ -13,9 +12,34 @@ public class scr_Player : NetworkBehaviour {
     [SyncVar]
     private int currentHealth;
 
+    [SyncVar]
+    private bool isDead = false;
+
     [SerializeField]
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
+
+    private void Awake() {
+        input = new PlayerInput();
+    }
+
+    private void InitializeInputActions() {
+
+        scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
+        scr_PlayerShoot shoot = GetComponent<scr_PlayerShoot>();
+
+        input.Player.Movement.performed += e => motor.MovementInput(e.ReadValue<Vector2>());
+
+        input.Player.View.performed += e => motor.ViewInput(e.ReadValue<Vector2>());
+
+        input.Player.Jump.performed += e => motor.JumpInput(e);
+
+        input.Player.Sprinting.started += e => motor.StartSprinting();
+
+        input.Player.Sprinting.performed += e => motor.StopSprintingByRelease();
+
+        input.Weapon.Fire.started += e => shoot.Shoot();
+    }
 
     public void Setup() {
         wasEnabled = new bool[disableOnDeath.Length];
@@ -49,7 +73,12 @@ public class scr_Player : NetworkBehaviour {
             disableOnDeath[i].enabled = false;
         }
 
-        GetComponent<CharacterController>().enabled = false;
+        scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
+        motor.inputMovement = Vector2.zero;
+        motor.inputView = Vector2.zero;
+
+        input.Disable();
+        motor.player.enabled = false;
 
         Debug.Log(transform.name + " DIED! :O");
 
@@ -66,15 +95,21 @@ public class scr_Player : NetworkBehaviour {
     }
 
     public void SetPlayerSettings() {
-        isDead = false;
 
+        isDead = false;
         currentHealth = maxHealth;
 
         for (int i = 0; i < disableOnDeath.Length; i++) {
             disableOnDeath[i].enabled = wasEnabled[i];
         }
 
-        GetComponent<CharacterController>().enabled = true;
+        scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
+        motor.inputMovement = Vector2.zero;
+        motor.inputView = Vector2.zero;
+
+        InitializeInputActions();
+        input.Enable();
+        motor.player.enabled = true;
     }
 
     public bool IsDead {

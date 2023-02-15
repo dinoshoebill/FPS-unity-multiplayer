@@ -500,6 +500,7 @@ MonoBehaviour:
   - {fileID: 8575633875941322850}
   - {fileID: 7010017629461651935}
   remotePayerLayer: RemotePlayer
+  playerUIPrefab: {fileID: 4031436874530674584, guid: fa977c6ecac7930459219f3439158383, type: 3}
 --- !u!143 &8575633876364303561
 CharacterController:
   m_ObjectHideFlags: 0
