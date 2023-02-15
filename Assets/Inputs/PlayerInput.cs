@@ -55,7 +55,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Sprinting"",
+                    ""name"": ""SprintingStart"",
                     ""type"": ""Button"",
                     ""id"": ""39af0063-1c5a-48fc-9a3c-5a0409a91d72"",
                     ""expectedControlType"": ""Button"",
@@ -64,9 +64,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Prone"",
+                    ""name"": ""SprintingStop"",
                     ""type"": ""Button"",
-                    ""id"": ""f1502a51-64c3-4323-96b8-712f10aab8a0"",
+                    ""id"": ""3bd9f318-07ed-427e-8c1f-cb83104c2334"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -155,21 +155,21 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""2b0348fb-21a2-4a50-b4ed-932f47df1a55"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Sprinting"",
+                    ""action"": ""SprintingStart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""63f2498d-def9-45c4-998f-b0341f3dab0f"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": """",
+                    ""id"": ""3f775084-6eb2-43eb-a458-5e4d07809ed3"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Prone"",
+                    ""action"": ""SprintingStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -180,9 +180,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             ""id"": ""72f5a5f8-4397-4cb5-aae7-b808edacebe2"",
             ""actions"": [
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""FireStart"",
                     ""type"": ""Button"",
                     ""id"": ""14e2b8be-26ae-4e9b-88f2-47f7d3e69c61"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FireStop"",
+                    ""type"": ""Button"",
+                    ""id"": ""883438c4-4928-45c7-bb61-5700f5fa323d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -197,7 +206,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fire"",
+                    ""action"": ""FireStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""201e792c-19da-46a8-839e-745a7ec9af22"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -211,11 +231,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_View = m_Player.FindAction("View", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Sprinting = m_Player.FindAction("Sprinting", throwIfNotFound: true);
-        m_Player_Prone = m_Player.FindAction("Prone", throwIfNotFound: true);
+        m_Player_SprintingStart = m_Player.FindAction("SprintingStart", throwIfNotFound: true);
+        m_Player_SprintingStop = m_Player.FindAction("SprintingStop", throwIfNotFound: true);
         // Weapon
         m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
-        m_Weapon_Fire = m_Weapon.FindAction("Fire", throwIfNotFound: true);
+        m_Weapon_FireStart = m_Weapon.FindAction("FireStart", throwIfNotFound: true);
+        m_Weapon_FireStop = m_Weapon.FindAction("FireStop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -278,8 +299,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_View;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Sprinting;
-    private readonly InputAction m_Player_Prone;
+    private readonly InputAction m_Player_SprintingStart;
+    private readonly InputAction m_Player_SprintingStop;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -287,8 +308,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @View => m_Wrapper.m_Player_View;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Sprinting => m_Wrapper.m_Player_Sprinting;
-        public InputAction @Prone => m_Wrapper.m_Player_Prone;
+        public InputAction @SprintingStart => m_Wrapper.m_Player_SprintingStart;
+        public InputAction @SprintingStop => m_Wrapper.m_Player_SprintingStop;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -307,12 +328,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Sprinting.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprinting;
-                @Sprinting.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprinting;
-                @Sprinting.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprinting;
-                @Prone.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProne;
-                @Prone.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProne;
-                @Prone.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProne;
+                @SprintingStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprintingStart;
+                @SprintingStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprintingStart;
+                @SprintingStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprintingStart;
+                @SprintingStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprintingStop;
+                @SprintingStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprintingStop;
+                @SprintingStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprintingStop;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -326,12 +347,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Sprinting.started += instance.OnSprinting;
-                @Sprinting.performed += instance.OnSprinting;
-                @Sprinting.canceled += instance.OnSprinting;
-                @Prone.started += instance.OnProne;
-                @Prone.performed += instance.OnProne;
-                @Prone.canceled += instance.OnProne;
+                @SprintingStart.started += instance.OnSprintingStart;
+                @SprintingStart.performed += instance.OnSprintingStart;
+                @SprintingStart.canceled += instance.OnSprintingStart;
+                @SprintingStop.started += instance.OnSprintingStop;
+                @SprintingStop.performed += instance.OnSprintingStop;
+                @SprintingStop.canceled += instance.OnSprintingStop;
             }
         }
     }
@@ -340,12 +361,14 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     // Weapon
     private readonly InputActionMap m_Weapon;
     private IWeaponActions m_WeaponActionsCallbackInterface;
-    private readonly InputAction m_Weapon_Fire;
+    private readonly InputAction m_Weapon_FireStart;
+    private readonly InputAction m_Weapon_FireStop;
     public struct WeaponActions
     {
         private @PlayerInput m_Wrapper;
         public WeaponActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Fire => m_Wrapper.m_Weapon_Fire;
+        public InputAction @FireStart => m_Wrapper.m_Weapon_FireStart;
+        public InputAction @FireStop => m_Wrapper.m_Weapon_FireStop;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -355,16 +378,22 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_WeaponActionsCallbackInterface != null)
             {
-                @Fire.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire;
-                @Fire.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire;
-                @Fire.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFire;
+                @FireStart.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireStart;
+                @FireStart.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireStart;
+                @FireStart.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireStart;
+                @FireStop.started -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireStop;
+                @FireStop.performed -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireStop;
+                @FireStop.canceled -= m_Wrapper.m_WeaponActionsCallbackInterface.OnFireStop;
             }
             m_Wrapper.m_WeaponActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Fire.started += instance.OnFire;
-                @Fire.performed += instance.OnFire;
-                @Fire.canceled += instance.OnFire;
+                @FireStart.started += instance.OnFireStart;
+                @FireStart.performed += instance.OnFireStart;
+                @FireStart.canceled += instance.OnFireStart;
+                @FireStop.started += instance.OnFireStop;
+                @FireStop.performed += instance.OnFireStop;
+                @FireStop.canceled += instance.OnFireStop;
             }
         }
     }
@@ -374,11 +403,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnView(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnSprinting(InputAction.CallbackContext context);
-        void OnProne(InputAction.CallbackContext context);
+        void OnSprintingStart(InputAction.CallbackContext context);
+        void OnSprintingStop(InputAction.CallbackContext context);
     }
     public interface IWeaponActions
     {
-        void OnFire(InputAction.CallbackContext context);
+        void OnFireStart(InputAction.CallbackContext context);
+        void OnFireStop(InputAction.CallbackContext context);
     }
 }

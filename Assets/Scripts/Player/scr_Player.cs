@@ -34,11 +34,15 @@ public class scr_Player : NetworkBehaviour {
 
         input.Player.Jump.performed += e => motor.JumpInput(e);
 
-        input.Player.Sprinting.started += e => motor.StartSprinting();
+        input.Player.SprintingStart.started += e => {
+            Debug.Log("started");
+            motor.StartSprinting(); };
 
-        input.Player.Sprinting.performed += e => motor.StopSprintingByRelease();
+        input.Player.SprintingStop.performed += e => {
+            Debug.Log("performed");
+            motor.StopSprintingByRelease(); };
 
-        input.Weapon.Fire.started += e => shoot.Shoot();
+        input.Weapon.FireStart.started += e => shoot.Shoot();
     }
 
     public void Setup() {

@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Sprinting",
+                    "name": "SprintingStart",
                     "type": "Button",
                     "id": "39af0063-1c5a-48fc-9a3c-5a0409a91d72",
                     "expectedControlType": "Button",
@@ -42,9 +42,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Prone",
+                    "name": "SprintingStop",
                     "type": "Button",
-                    "id": "f1502a51-64c3-4323-96b8-712f10aab8a0",
+                    "id": "3bd9f318-07ed-427e-8c1f-cb83104c2334",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -133,21 +133,21 @@
                     "name": "",
                     "id": "2b0348fb-21a2-4a50-b4ed-932f47df1a55",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Sprinting",
+                    "action": "SprintingStart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "63f2498d-def9-45c4-998f-b0341f3dab0f",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
+                    "id": "3f775084-6eb2-43eb-a458-5e4d07809ed3",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
-                    "action": "Prone",
+                    "action": "SprintingStop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -158,9 +158,18 @@
             "id": "72f5a5f8-4397-4cb5-aae7-b808edacebe2",
             "actions": [
                 {
-                    "name": "Fire",
+                    "name": "FireStart",
                     "type": "Button",
                     "id": "14e2b8be-26ae-4e9b-88f2-47f7d3e69c61",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FireStop",
+                    "type": "Button",
+                    "id": "883438c4-4928-45c7-bb61-5700f5fa323d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -175,7 +184,18 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Fire",
+                    "action": "FireStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "201e792c-19da-46a8-839e-745a7ec9af22",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireStop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

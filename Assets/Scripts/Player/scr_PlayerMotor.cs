@@ -18,8 +18,7 @@ public class scr_PlayerMotor : MonoBehaviour {
     private Vector2 speedVector;
     private Vector2 speedVelocity;
 
-    [HideInInspector]
-    public bool isSprinting;
+    private bool isSprinting;
     private bool wantsSprinting;
     private float jumpingForce;
     private float speed;
@@ -39,7 +38,7 @@ public class scr_PlayerMotor : MonoBehaviour {
 
     #region - Awake / Update -
     private void Awake() {
-        player = GetComponent<CharacterController>();
+        // player = GetComponent<CharacterController>();
         InitializePlayerSettings();
     }
     #endregion
@@ -166,6 +165,7 @@ public class scr_PlayerMotor : MonoBehaviour {
     }
 
     public void StartSprinting() {
+        Debug.Log("called");
         if (isSprinting) {
             return;
         } else {
