@@ -78,11 +78,8 @@ public class scr_Player : NetworkBehaviour {
         }
 
         scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
-        motor.inputMovement = Vector2.zero;
-        motor.inputView = Vector2.zero;
-
-        input.Disable();
         motor.player.enabled = false;
+        input.Disable();
 
         Debug.Log(transform.name + " DIED! :O");
 
@@ -108,12 +105,10 @@ public class scr_Player : NetworkBehaviour {
         }
 
         scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
-        motor.inputMovement = Vector2.zero;
-        motor.inputView = Vector2.zero;
+        motor.player.enabled = true;
 
         InitializeInputActions();
         input.Enable();
-        motor.player.enabled = true;
     }
 
     public bool IsDead {
