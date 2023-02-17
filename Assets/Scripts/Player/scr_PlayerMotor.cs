@@ -1,5 +1,4 @@
 using UnityEngine;
-using static scr_Settings;
 
 [RequireComponent(typeof(CharacterController))]
 public class scr_PlayerMotor : MonoBehaviour {
@@ -26,11 +25,7 @@ public class scr_PlayerMotor : MonoBehaviour {
 
     #region - Headers -
     [Header("Preferences")]
-    public Transform feetTransform;
     public Transform cameraHolder;
-
-    [Header("Settings")]
-    public PlayerSettingsModel settings;
 
     [Header("Player Mask")]
     public LayerMask playerMask;
@@ -71,9 +66,9 @@ public class scr_PlayerMotor : MonoBehaviour {
         speedVector = Vector2.SmoothDamp(speedVector,
         new Vector2(
             speed * inputMovement.y * Time.deltaTime,
-            speed * (isSprinting ? settings.speedStrafeSprintMultiplier : settings.speedStrafeMultiplier) * inputMovement.x * Time.deltaTime),
+            speed * (isSprinting ? scr_PlayerGlobals.speedStrafeSprintMultiplier : scr_PlayerGlobals.speedStrafeMultiplier) * inputMovement.x * Time.deltaTime),
         ref speedVelocity,
-        settings.movementSmoothing, player.isGrounded ? settings.movementSmoothing : settings.airTimeSmoothing);
+        scr_PlayerGlobals.movementSmoothing, player.isGrounded ? scr_PlayerGlobals.movementSmoothing : scr_PlayerGlobals.airTimeSmoothing);
 
         Vector3 newPlayerMovement = new Vector3(speedVector.y, jumpingForce * Time.deltaTime, speedVector.x);
         newPlayerMovement = transform.TransformDirection(newPlayerMovement);
@@ -81,11 +76,11 @@ public class scr_PlayerMotor : MonoBehaviour {
     }
 
     private void CalculateView() {
-        playerRotation.y += settings.viewXSensitivity * inputView.x * Time.deltaTime;
+        playerRotation.y += scr_PlayerGlobals.viewXSensitivity * inputView.x * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(playerRotation);
 
-        cameraRotation.x += settings.viewYSensitivity * -inputView.y * Time.deltaTime;
-        cameraRotation.x = Mathf.Clamp(cameraRotation.x, settings.viewClampYMin, settings.viewClampYMax);
+        cameraRotation.x += scr_PlayerGlobals.viewYSensitivity * -inputView.y * Time.deltaTime;
+        cameraRotation.x = Mathf.Clamp(cameraRotation.x, scr_PlayerGlobals.viewClampYMin, scr_PlayerGlobals.viewClampYMax);
 
         cameraHolder.localRotation = Quaternion.Euler(cameraRotation);
     }
@@ -94,9 +89,9 @@ public class scr_PlayerMotor : MonoBehaviour {
     #region - Jump / Gravity -
     public void JumpInput(UnityEngine.InputSystem.InputAction.CallbackContext e) {
         if (e.interaction is UnityEngine.InputSystem.Interactions.TapInteraction)
-            Jump(settings.jumpPower);
+            Jump(scr_PlayerGlobals.jumpPower);
         else
-            Jump(settings.jumpPower * settings.doubleJumpMultiplier);
+            Jump(scr_PlayerGlobals.jumpPower * scr_PlayerGlobals.doubleJumpMultiplier);
     }
 
     private void ApplyGravity() {
@@ -104,7 +99,7 @@ public class scr_PlayerMotor : MonoBehaviour {
             jumpingForce = -1f;
         }
         else {
-            jumpingForce += settings.gravity * settings.gravityMultiplier * Time.deltaTime;
+            jumpingForce += scr_PlayerGlobals.gravity * scr_PlayerGlobals.gravityMultiplier * Time.deltaTime;
         }
     }
 
@@ -124,44 +119,22 @@ public class scr_PlayerMotor : MonoBehaviour {
         playerRotation = transform.localRotation.eulerAngles;
         cameraRotation = cameraHolder.localRotation.eulerAngles;
 
-        settings.viewXSensitivity = 12;
-        settings.viewYSensitivity = 12;
-
-        settings.speedSprint = 12;
-        settings.speedStand = 7;
-
-        settings.viewClampYMin = -70;
-        settings.viewClampYMax = 70;
-
-        settings.jumpPower = 15;
-
-        settings.gravity = -10;
-        settings.gravityMultiplier = 5;
-
-        settings.movementSmoothing = 0.3f;
-        settings.airTimeSmoothing = 0.05f;
-
-        settings.speedStrafeMultiplier = 0.7f;
-        settings.speedStrafeSprintMultiplier = 0.5f;
-
-        settings.doubleJumpMultiplier = 1.3f;
-
         isSprinting = false;
         wantsSprinting = false;
-        speed = settings.speedStand;
+        speed = scr_PlayerGlobals.speedStand;
     }
     #endregion
 
     #region - Sprinting -
     public void StopSprinting() {
         isSprinting = false;
-        speed = settings.speedStand;
+        speed = scr_PlayerGlobals.speedStand;
     }
 
     public void StopSprintingByRelease() {
         isSprinting = false;
         wantsSprinting = false;
-        speed = settings.speedStand;
+        speed = scr_PlayerGlobals.speedStand;
     }
 
     public void StartSprinting() {
@@ -171,7 +144,7 @@ public class scr_PlayerMotor : MonoBehaviour {
         } else {
             wantsSprinting = true;
             isSprinting = true;
-            speed = settings.speedSprint;
+            speed = scr_PlayerGlobals.speedSprint;
         }
     }
     #endregion

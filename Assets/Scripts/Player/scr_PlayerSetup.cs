@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mirror;
+using static scr_PlayerGlobals;
 
 [RequireComponent(typeof(scr_Player))]
 public class scr_PlayerSetup : NetworkBehaviour {
@@ -8,9 +9,6 @@ public class scr_PlayerSetup : NetworkBehaviour {
     private Behaviour[] componentsToDisable;
 
     private Camera sceneCamera;
-
-    [SerializeField]
-    private string remotePlayerLayer = "RemotePlayer";
 
     [SerializeField]
     private GameObject playerUIPrefab;
@@ -49,7 +47,7 @@ public class scr_PlayerSetup : NetworkBehaviour {
     }
 
     private void AssignRemoteLayer() {
-        gameObject.layer = LayerMask.NameToLayer(remotePlayerLayer);
+        gameObject.layer = LayerMask.NameToLayer(scr_PlayerGlobals.remotePlayerLayer);
     }
 
     private void DisableComponents() {

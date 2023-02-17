@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 8575633876364303557}
   - component: {fileID: 1326436557205562867}
   - component: {fileID: 8575633876364303561}
+  - component: {fileID: 1052873206249649508}
   - component: {fileID: 3694350471683935963}
   - component: {fileID: 2956130980172028678}
   - component: {fileID: 2572775874988614280}
@@ -425,7 +426,6 @@ Transform:
   m_Children:
   - {fileID: 8575633875843694610}
   - {fileID: 853586712588784114}
-  - {fileID: 8575633877760257827}
   - {fileID: 8575633876723291426}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -445,7 +445,6 @@ MonoBehaviour:
   player: {fileID: 8575633876364303561}
   inputMovement: {x: 0, y: 0}
   inputView: {x: 0, y: 0}
-  feetTransform: {fileID: 8575633877760257827}
   cameraHolder: {fileID: 8575633876723291426}
   settings:
     viewXSensitivity: 0
@@ -483,6 +482,18 @@ CharacterController:
   m_SkinWidth: 0.1
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1052873206249649508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575633876364303555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867f6cbc0f9d43a44a210fc7649e36a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3694350471683935963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,7 +633,6 @@ MonoBehaviour:
   deadPlayerLayer: DeadPlayer
   remotePlayerLayer: RemotePlayer
   localPlayerLayer: Player
-  maxHealth: 100
   disableOnDeath:
   - {fileID: 1326436557205562867}
   - {fileID: 7010017629461651935}
@@ -658,7 +668,7 @@ Transform:
   - {fileID: 8446325819777353822}
   - {fileID: 8575633877652203511}
   m_Father: {fileID: 8575633876364303557}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8575633877115247075
 GameObject:
@@ -742,44 +752,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 1326436557205562867}
-  swayAmountA: 0
-  swayAmountB: 0
-  swayScale: 0
-  swayLerpSpeed: 0
   swayClampX: 0
   swayClampY: 0
-  swayClampZ: 0
---- !u!1 &8575633877760257826
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8575633877760257827}
-  m_Layer: 6
-  m_Name: Feet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8575633877760257827
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8575633877760257826}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8575633876364303557}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8899556479798294384
 GameObject:
   m_ObjectHideFlags: 0

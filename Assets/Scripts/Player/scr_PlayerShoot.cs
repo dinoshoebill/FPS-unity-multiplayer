@@ -6,9 +6,6 @@ public class scr_PlayerShoot : NetworkBehaviour {
     private const string PLAYER_TAG = "Player";
 
     [SerializeField]
-    private string weaponLayerName = "Weapon";
-
-    [SerializeField]
     private scr_Weapon weapon;
     [SerializeField]
     private GameObject weaponGFX;
@@ -28,7 +25,7 @@ public class scr_PlayerShoot : NetworkBehaviour {
         }
 
         weaponGFX = weapon.gameObject;
-        weaponGFX.layer = LayerMask.NameToLayer(weaponLayerName);
+        weaponGFX.layer = LayerMask.NameToLayer(scr_PlayerGlobals.weaponLayer);
     }
 
     [Client]

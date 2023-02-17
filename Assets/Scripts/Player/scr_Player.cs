@@ -6,18 +6,6 @@ public class scr_Player : NetworkBehaviour {
 
     private PlayerInput input;
 
-    [SerializeField]
-    private string deadPlayerLayer = "DeadPlayer";
-
-    [SerializeField]
-    private string remotePlayerLayer = "RemotePlayer";
-
-    [SerializeField]
-    private string localPlayerLayer = "Player";
-
-    [SerializeField]
-    private int maxHealth = 100;
-
     [SyncVar]
     private int currentHealth;
 
@@ -95,7 +83,7 @@ public class scr_Player : NetworkBehaviour {
         var children = this.GetComponentsInChildren<Transform>(includeInactive: true);
 
         foreach (var child in children) {
-            child.gameObject.layer = LayerMask.NameToLayer(deadPlayerLayer);
+            child.gameObject.layer = LayerMask.NameToLayer(scr_PlayerGlobals.deadPlayerLayer);
         }
 
         StartCoroutine(Respawn());
@@ -113,7 +101,7 @@ public class scr_Player : NetworkBehaviour {
     public void SetPlayerSettings() {
 
         isDead = false;
-        currentHealth = maxHealth;
+        currentHealth = scr_PlayerGlobals.health;
 
         for (int i = 0; i < disableOnDeath.Length; i++) {
             disableOnDeath[i].enabled = wasEnabled[i];
@@ -126,11 +114,11 @@ public class scr_Player : NetworkBehaviour {
 
         if (!isLocalPlayer)
             foreach (var child in children) {
-                child.gameObject.layer = LayerMask.NameToLayer(remotePlayerLayer);
+                child.gameObject.layer = LayerMask.NameToLayer(scr_PlayerGlobals.remotePlayerLayer);
             }
         else
             foreach (var child in children) {
-                child.gameObject.layer = LayerMask.NameToLayer(localPlayerLayer);
+                child.gameObject.layer = LayerMask.NameToLayer(scr_PlayerGlobals.localPlayerLayer);
             }
         
 
