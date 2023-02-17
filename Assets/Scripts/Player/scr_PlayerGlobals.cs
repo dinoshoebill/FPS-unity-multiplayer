@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class scr_PlayerGlobals {
+public class scr_PlayerGlobals {
 
     [Header("Health")]
     public static int health = 100;

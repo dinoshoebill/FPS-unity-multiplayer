@@ -398,7 +398,6 @@ GameObject:
   - component: {fileID: 8575633876364303557}
   - component: {fileID: 1326436557205562867}
   - component: {fileID: 8575633876364303561}
-  - component: {fileID: 1052873206249649508}
   - component: {fileID: 3694350471683935963}
   - component: {fileID: 2956130980172028678}
   - component: {fileID: 2572775874988614280}
@@ -446,21 +445,6 @@ MonoBehaviour:
   inputMovement: {x: 0, y: 0}
   inputView: {x: 0, y: 0}
   cameraHolder: {fileID: 8575633876723291426}
-  settings:
-    viewXSensitivity: 0
-    viewYSensitivity: 0
-    viewClampYMin: 0
-    viewClampYMax: 0
-    speedSprint: 0
-    speedStand: 0
-    movementSmoothing: 0
-    airTimeSmoothing: 0
-    jumpPower: 0
-    gravity: 0
-    speedStrafeMultiplier: 0
-    speedStrafeSprintMultiplier: 0
-    gravityMultiplier: 0
-    doubleJumpMultiplier: 0
   playerMask:
     serializedVersion: 2
     m_Bits: 183
@@ -482,18 +466,6 @@ CharacterController:
   m_SkinWidth: 0.1
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1052873206249649508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8575633876364303555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 867f6cbc0f9d43a44a210fc7649e36a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3694350471683935963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +488,6 @@ MonoBehaviour:
   - {fileID: 8575633875941322850}
   - {fileID: 5882479324123989473}
   - {fileID: 4254962818418553232}
-  remotePlayerLayer: RemotePlayer
   playerUIPrefab: {fileID: 4031436874530674584, guid: fa977c6ecac7930459219f3439158383, type: 3}
 --- !u!114 &2956130980172028678
 MonoBehaviour:
@@ -607,7 +578,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  weaponLayerName: Weapon
   weapon: {fileID: 4964163773888297265}
   weaponGFX: {fileID: 6235904722170559719}
   mask:
@@ -630,9 +600,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  deadPlayerLayer: DeadPlayer
-  remotePlayerLayer: RemotePlayer
-  localPlayerLayer: Player
   disableOnDeath:
   - {fileID: 1326436557205562867}
   - {fileID: 7010017629461651935}
@@ -752,8 +719,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 1326436557205562867}
-  swayClampX: 0
-  swayClampY: 0
 --- !u!1 &8899556479798294384
 GameObject:
   m_ObjectHideFlags: 0
