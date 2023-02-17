@@ -10,7 +10,7 @@ public class scr_PlayerSetup : NetworkBehaviour {
     private Camera sceneCamera;
 
     [SerializeField]
-    private string remotePayerLayer = "RemotePlayer";
+    private string remotePlayerLayer = "RemotePlayer";
 
     [SerializeField]
     private GameObject playerUIPrefab;
@@ -27,10 +27,10 @@ public class scr_PlayerSetup : NetworkBehaviour {
             DisableSceneCamera();
         }
 
-        GetComponent<scr_Player>().Setup();
-
         playerUIInstance = Instantiate(playerUIPrefab);
         playerUIInstance.name = playerUIPrefab.name;
+
+        GetComponent<scr_Player>().Setup();
     }
 
     public override void OnStartClient() {
@@ -49,7 +49,7 @@ public class scr_PlayerSetup : NetworkBehaviour {
     }
 
     private void AssignRemoteLayer() {
-        gameObject.layer = LayerMask.NameToLayer(remotePayerLayer);
+        gameObject.layer = LayerMask.NameToLayer(remotePlayerLayer);
     }
 
     private void DisableComponents() {

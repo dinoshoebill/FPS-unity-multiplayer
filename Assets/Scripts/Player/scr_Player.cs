@@ -7,6 +7,15 @@ public class scr_Player : NetworkBehaviour {
     private PlayerInput input;
 
     [SerializeField]
+    private string deadPlayerLayer = "DeadPlayer";
+
+    [SerializeField]
+    private string remotePlayerLayer = "RemotePlayer";
+
+    [SerializeField]
+    private string localPlayerLayer = "Player";
+
+    [SerializeField]
     private int maxHealth = 100;
 
     [SyncVar]
@@ -83,6 +92,12 @@ public class scr_Player : NetworkBehaviour {
 
         Debug.Log(transform.name + " DIED! :O");
 
+        var children = this.GetComponentsInChildren<Transform>(includeInactive: true);
+
+        foreach (var child in children) {
+            child.gameObject.layer = LayerMask.NameToLayer(deadPlayerLayer);
+        }
+
         StartCoroutine(Respawn());
     }
 
@@ -106,6 +121,18 @@ public class scr_Player : NetworkBehaviour {
 
         scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
         motor.player.enabled = true;
+
+        var children = this.GetComponentsInChildren<Transform>(includeInactive: true);
+
+        if (!isLocalPlayer)
+            foreach (var child in children) {
+                child.gameObject.layer = LayerMask.NameToLayer(remotePlayerLayer);
+            }
+        else
+            foreach (var child in children) {
+                child.gameObject.layer = LayerMask.NameToLayer(localPlayerLayer);
+            }
+        
 
         InitializeInputActions();
         input.Enable();

@@ -504,7 +504,8 @@ MonoBehaviour:
   - {fileID: 8575633875941322851}
   - {fileID: 8575633875941322850}
   - {fileID: 5882479324123989473}
-  remotePayerLayer: RemotePlayer
+  - {fileID: 4254962818418553232}
+  remotePlayerLayer: RemotePlayer
   playerUIPrefab: {fileID: 4031436874530674584, guid: fa977c6ecac7930459219f3439158383, type: 3}
 --- !u!114 &2956130980172028678
 MonoBehaviour:
@@ -618,6 +619,9 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  deadPlayerLayer: DeadPlayer
+  remotePlayerLayer: RemotePlayer
+  localPlayerLayer: Player
   maxHealth: 100
   disableOnDeath:
   - {fileID: 1326436557205562867}
@@ -870,7 +874,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
