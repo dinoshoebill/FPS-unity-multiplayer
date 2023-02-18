@@ -25,7 +25,7 @@ public class scr_PlayerSetup : NetworkBehaviour {
             DisableSceneCamera();
         }
 
-        playerUIInstance = Instantiate(playerUIPrefab);
+        playerUIInstance = Instantiate(playerUIPrefab, this.transform);
         playerUIInstance.name = playerUIPrefab.name;
 
         GetComponent<scr_Player>().Setup();

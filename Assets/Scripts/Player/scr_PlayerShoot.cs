@@ -10,7 +10,8 @@ public class scr_PlayerShoot : NetworkBehaviour {
     [SerializeField]
     private GameObject weaponGFX;
 
-    public LayerMask mask;
+    [Header("Layer Mask")]
+    [SerializeField] private LayerMask mask;
 
     [SerializeField]
     private Transform barrel;
@@ -19,11 +20,8 @@ public class scr_PlayerShoot : NetworkBehaviour {
     private scr_WeaponSway weaponSway;
 
     private void Start() {
-        if (barrel == null) {
-            Debug.LogError("No weapon barrel referenced");
-            this.enabled = false;
-        }
-
+        barrel = GameObject.Find("BarrelEnd").transform;
+        weaponSway = GetComponentInChildren<scr_WeaponSway>();
         weaponGFX = weapon.gameObject;
         weaponGFX.layer = LayerMask.NameToLayer(scr_PlayerGlobals.weaponLayer);
     }

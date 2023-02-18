@@ -24,11 +24,9 @@ public class scr_PlayerMotor : MonoBehaviour {
     #endregion
 
     #region - Headers -
-    [Header("Preferences")]
-    public Transform cameraHolder;
+    [Header("Player Camera")]
+    [SerializeField] private Transform cameraHolder;
 
-    [Header("Player Mask")]
-    public LayerMask playerMask;
     #endregion
 
     #region - Awake / Update -
@@ -36,13 +34,13 @@ public class scr_PlayerMotor : MonoBehaviour {
         // player = GetComponent<CharacterController>();
         InitializePlayerSettings();
     }
-    #endregion
 
     private void Update() {
         CalculateView();
         CalculateMovement();
         ApplyGravity();
     }
+    #endregion
 
     #region - View / Movement -
     public void ViewInput(Vector2 input) {
@@ -138,7 +136,6 @@ public class scr_PlayerMotor : MonoBehaviour {
     }
 
     public void StartSprinting() {
-        Debug.Log("called");
         if (isSprinting) {
             return;
         } else {

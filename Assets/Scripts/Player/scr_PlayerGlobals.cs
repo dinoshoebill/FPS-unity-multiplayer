@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class scr_PlayerGlobals {
+public class scr_PlayerGlobals : MonoBehaviour {
 
     [Header("Health")]
     public static int health = 100;

@@ -25,19 +25,20 @@ public class scr_Player : NetworkBehaviour {
         scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
         scr_PlayerShoot shoot = GetComponent<scr_PlayerShoot>();
 
-        input.Player.Movement.performed += e => motor.MovementInput(e.ReadValue<Vector2>());
+        input.Player.Movement.performed += e => 
+            motor.MovementInput(e.ReadValue<Vector2>());
 
-        input.Player.View.performed += e => motor.ViewInput(e.ReadValue<Vector2>());
+        input.Player.View.performed += e => 
+            motor.ViewInput(e.ReadValue<Vector2>());
 
-        input.Player.Jump.performed += e => motor.JumpInput(e);
+        input.Player.Jump.performed += e => 
+            motor.JumpInput(e);
 
-        input.Player.SprintingStart.started += e => {
-            Debug.Log("started");
-            motor.StartSprinting(); };
+        input.Player.SprintingStart.started += e =>
+            motor.StartSprinting();
 
-        input.Player.SprintingStop.performed += e => {
-            Debug.Log("performed");
-            motor.StopSprintingByRelease(); };
+        input.Player.SprintingStop.performed += e => 
+            motor.StopSprintingByRelease();
 
         input.Weapon.FireStart.started += e => shoot.Shoot();
     }
@@ -74,8 +75,6 @@ public class scr_Player : NetworkBehaviour {
             disableOnDeath[i].enabled = false;
         }
 
-        scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
-        motor.player.enabled = false;
         input.Disable();
 
         Debug.Log(transform.name + " DIED! :O");
@@ -93,8 +92,12 @@ public class scr_Player : NetworkBehaviour {
         yield return new WaitForSeconds(scr_GameManager.instance.matchSettings.respawnTime);
 
         Transform spawnpoint = NetworkManager.singleton.GetStartPosition();
+
+        scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
+        motor.player.enabled = false;
         transform.position = spawnpoint.position;
         transform.rotation = spawnpoint.rotation;
+        motor.player.enabled = true;
         SetPlayerSettings();
     }
 
@@ -106,9 +109,6 @@ public class scr_Player : NetworkBehaviour {
         for (int i = 0; i < disableOnDeath.Length; i++) {
             disableOnDeath[i].enabled = wasEnabled[i];
         }
-
-        scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
-        motor.player.enabled = true;
 
         var children = this.GetComponentsInChildren<Transform>(includeInactive: true);
 
