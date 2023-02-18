@@ -24,6 +24,7 @@ public class scr_Player : NetworkBehaviour {
 
         scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
         scr_PlayerShoot shoot = GetComponent<scr_PlayerShoot>();
+        scr_WeaponManager weapon = GetComponent<scr_WeaponManager>();
 
         input.Player.Movement.performed += e => 
             motor.MovementInput(e.ReadValue<Vector2>());
@@ -41,6 +42,8 @@ public class scr_Player : NetworkBehaviour {
             motor.StopSprintingByRelease();
 
         input.Weapon.FireStart.started += e => shoot.Shoot();
+
+        input.Weapon.WeaponSwitch.performed += e => weapon.SwitchWeapon(e.ReadValue<Vector2>().y);
     }
 
     public void Setup() {
