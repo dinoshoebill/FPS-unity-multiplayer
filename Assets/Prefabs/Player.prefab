@@ -578,13 +578,12 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  weapon: {fileID: 4964163773888297265}
-  weaponGFX: {fileID: 6235904722170559719}
   mask:
     serializedVersion: 2
     m_Bits: 183
   barrel: {fileID: 3780508406914469110}
   weaponSway: {fileID: 4428122635188519889}
+  weaponManager: {fileID: 164537312033610233}
 --- !u!114 &4254962818418553232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,17 +891,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
---- !u!114 &4964163773888297265 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -4796439648710123700, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
-  m_PrefabInstance: {fileID: 8758339280246531709}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b0d1644328e76488006fe860c6d3f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8762827862242365205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4519716788627816, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}

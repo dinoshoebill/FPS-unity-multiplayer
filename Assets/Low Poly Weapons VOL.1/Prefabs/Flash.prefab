@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4408339615606960}
   - component: {fileID: 33944325949276540}
   - component: {fileID: 23559475949960412}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1516097666562846}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4166790287867392}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4166790287867392}
   - component: {fileID: 33557864609465042}
   - component: {fileID: 23574695343780846}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

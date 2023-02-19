@@ -21,12 +21,9 @@ public class scr_PlayerMotor : MonoBehaviour {
     private bool wantsSprinting;
     private float jumpingForce;
     private float speed;
-    #endregion
 
-    #region - Headers -
     [Header("Player Camera")]
     [SerializeField] private Transform cameraHolder;
-
     #endregion
 
     #region - Awake / Update -

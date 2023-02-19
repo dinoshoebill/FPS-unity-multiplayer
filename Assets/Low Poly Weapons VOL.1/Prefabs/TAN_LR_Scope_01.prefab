@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4523601712017382}
   - component: {fileID: 33805421945796798}
   - component: {fileID: 23697667482446966}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TAN_LR_Scope_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1378609178869200}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4589919036242966}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4589919036242966}
   - component: {fileID: 33746766556658876}
   - component: {fileID: 23644098807867474}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rings
   m_TagString: Untagged
   m_Icon: {fileID: 0}

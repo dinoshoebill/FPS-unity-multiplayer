@@ -5,11 +5,6 @@ public class scr_PlayerShoot : NetworkBehaviour {
 
     private const string PLAYER_TAG = "Player";
 
-    [SerializeField]
-    private scr_Weapon weapon;
-    [SerializeField]
-    private GameObject weaponGFX;
-
     [Header("Layer Mask")]
     [SerializeField] private LayerMask mask;
 
@@ -19,11 +14,12 @@ public class scr_PlayerShoot : NetworkBehaviour {
     [SerializeField]
     private scr_WeaponSway weaponSway;
 
+    [SerializeField]
+    private scr_WeaponManager weaponManager;
+
     private void Start() {
         barrel = GameObject.Find("BarrelEnd").transform;
         weaponSway = GetComponentInChildren<scr_WeaponSway>();
-        weaponGFX = weapon.gameObject;
-        weaponGFX.layer = LayerMask.NameToLayer(scr_PlayerGlobals.weaponLayer);
     }
 
     [Client]
@@ -34,9 +30,9 @@ public class scr_PlayerShoot : NetworkBehaviour {
 
         barrel.localRotation = weaponSway.transform.localRotation;
 
-        if (Physics.Raycast(barrel.position, barrel.forward, out ray, weapon.weaponData.range, mask)) {
+        if (Physics.Raycast(barrel.position, barrel.forward, out ray, weaponManager.currentWeapon.weaponData.range, mask)) {
             if (ray.collider.tag == PLAYER_TAG) {
-                CmdPlayerShot(ray.collider.name, weapon.weaponData.damage);
+                CmdPlayerShot(ray.collider.name, weaponManager.currentWeapon.weaponData.damage);
             }
         }
     }

@@ -7,7 +7,7 @@ public class scr_WeaponManager : NetworkBehaviour {
     private int selectedWeapon = 0;
 
     [SerializeField]
-    private scr_Weapon currentWeapon;
+    public scr_Weapon currentWeapon;
 
     [SerializeField]
     private Transform weaponHolder;
@@ -26,6 +26,15 @@ public class scr_WeaponManager : NetworkBehaviour {
             if (i == selectedWeapon) {
                 weapon.gameObject.SetActive(true);
                 currentWeapon = weapon.childCount > 0 ? weapon.GetChild(0).GetComponent<scr_Weapon>() : null;
+                if (currentWeapon) {
+                    LayerMask weaponLayer = LayerMask.NameToLayer(scr_PlayerGlobals.weaponLayer);
+                    if(currentWeapon.gameObject.layer != weaponLayer) {
+                        currentWeapon.gameObject.layer = weaponLayer;
+                        foreach (Transform weaponPart in currentWeapon.transform) {
+                            weaponPart.gameObject.layer = weaponLayer;
+                        }
+                    }
+                }
             } else {
                 weapon.gameObject.SetActive(false);
             }

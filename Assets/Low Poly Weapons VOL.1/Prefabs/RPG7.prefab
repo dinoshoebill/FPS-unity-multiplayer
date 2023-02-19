@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4747097732552298}
   - component: {fileID: 33139384063206116}
   - component: {fileID: 23014844045418386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4071463830363502}
   - component: {fileID: 33092926340133414}
   - component: {fileID: 23100547221564144}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RPG7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 1411512464560164}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4747097732552298}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 4525525179064062}
   - component: {fileID: 33625029223417904}
   - component: {fileID: 23391533617881980}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
