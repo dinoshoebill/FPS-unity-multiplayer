@@ -24,6 +24,10 @@ public class scr_PlayerShoot : NetworkBehaviour {
 
     [Client]
     public void Shoot() {
+
+        if (!weaponManager.currentWeapon)
+            return;
+
         RaycastHit ray;
 
         Debug.Log("Shooting");

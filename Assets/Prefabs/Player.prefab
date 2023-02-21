@@ -488,6 +488,7 @@ MonoBehaviour:
   - {fileID: 5882479324123989473}
   - {fileID: 4254962818418553232}
   - {fileID: 164537312033610233}
+  - {fileID: 4428122635188519889}
   playerUIPrefab: {fileID: 4031436874530674584, guid: fa977c6ecac7930459219f3439158383, type: 3}
 --- !u!114 &2956130980172028678
 MonoBehaviour:
@@ -578,6 +579,12 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  barrel: {fileID: 0}
+  weaponSway: {fileID: 0}
+  weaponManager: {fileID: 0}
 --- !u!114 &4254962818418553232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,6 +603,7 @@ MonoBehaviour:
   disableOnDeath:
   - {fileID: 1326436557205562867}
   - {fileID: 7010017629461651935}
+  - {fileID: 164537312033610233}
 --- !u!114 &7543101855301966646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,8 +632,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   selectedWeapon: 0
+  currentWeapon: {fileID: 0}
   weaponHolder: {fileID: 8575633877652203511}
-  throwableHolder: {fileID: 0}
 --- !u!1 &8575633876723291425
 GameObject:
   m_ObjectHideFlags: 0
