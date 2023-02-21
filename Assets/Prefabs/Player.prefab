@@ -578,12 +578,6 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  mask:
-    serializedVersion: 2
-    m_Bits: 183
-  barrel: {fileID: 3780508406914469110}
-  weaponSway: {fileID: 4428122635188519889}
-  weaponManager: {fileID: 164537312033610233}
 --- !u!114 &4254962818418553232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,8 +624,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   selectedWeapon: 0
-  currentWeapon: {fileID: 0}
-  weaponHolder: {fileID: 0}
+  weaponHolder: {fileID: 8575633877652203511}
+  throwableHolder: {fileID: 0}
 --- !u!1 &8575633876723291425
 GameObject:
   m_ObjectHideFlags: 0
