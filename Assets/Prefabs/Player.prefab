@@ -489,10 +489,10 @@ MonoBehaviour:
   syncInterval: 0.1
   mask:
     serializedVersion: 2
-    m_Bits: 0
-  barrel: {fileID: 0}
-  weaponSway: {fileID: 0}
-  weaponManager: {fileID: 0}
+    m_Bits: 695
+  barrel: {fileID: 3780508406914469110}
+  weaponSway: {fileID: 4428122635188519889}
+  weaponManager: {fileID: 164537312033610233}
 --- !u!114 &4254962818418553232
 MonoBehaviour:
   m_ObjectHideFlags: 0
