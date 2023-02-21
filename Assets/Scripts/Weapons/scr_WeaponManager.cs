@@ -12,7 +12,7 @@ public class scr_WeaponManager : NetworkBehaviour {
     [SerializeField]
     private Transform weaponHolder;
 
-    private void Start() {
+    public void Setup() {
         weaponHolder = GameObject.Find("WeaponHolder").transform;
         currentWeapon = weaponHolder.GetChild(0).childCount > 0 ? weaponHolder.GetChild(0).GetChild(0).GetComponent<scr_Weapon>() : null;
         SelectWeapon();
@@ -20,17 +20,23 @@ public class scr_WeaponManager : NetworkBehaviour {
 
     private void SelectWeapon() {
 
-
-        if (!currentWeapon)
-            return;
+        Debug.Log(isLocalPlayer);
+        Debug.Log(currentWeapon);
 
         int i = 0;
 
         foreach (Transform weapon in weaponHolder) {
             if (i == selectedWeapon) {
                 weapon.gameObject.SetActive(true);
+
+                if (weapon.childCount == 0) {
+                    weapon.gameObject.SetActive(false);
+                    i++;
+                    continue;
+                }
+
                 currentWeapon = weapon.childCount > 0 ? weapon.GetChild(0).GetComponent<scr_Weapon>() : null;
-                if (isLocalPlayer && currentWeapon)
+                if (isLocalPlayer)
                     SetLayerRecursively();
             } else {
                 weapon.gameObject.SetActive(false);
@@ -62,6 +68,10 @@ public class scr_WeaponManager : NetworkBehaviour {
     }
 
     private void SetLayerRecursively() {
+
+        if (!currentWeapon)
+            return;
+
         LayerMask weaponLayer = LayerMask.NameToLayer(scr_PlayerGlobals.weaponLayer);
         if (currentWeapon.gameObject.layer != weaponLayer) {
             currentWeapon.gameObject.layer = weaponLayer;

@@ -1,8 +1,8 @@
 using UnityEngine;
 using Mirror;
-using static scr_PlayerGlobals;
 
 [RequireComponent(typeof(scr_Player))]
+[RequireComponent(typeof(scr_WeaponManager))]
 public class scr_PlayerSetup : NetworkBehaviour {
 
     [SerializeField]
@@ -23,6 +23,7 @@ public class scr_PlayerSetup : NetworkBehaviour {
             AssignRemoteLayer();
         } else {
             DisableSceneCamera();
+            GetComponent<scr_WeaponManager>().Setup();
         }
 
         playerUIInstance = Instantiate(playerUIPrefab, this.transform);
