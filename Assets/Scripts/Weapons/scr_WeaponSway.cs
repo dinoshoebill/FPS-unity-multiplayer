@@ -5,6 +5,9 @@ public class scr_WeaponSway : MonoBehaviour {
     [SerializeField]
     private scr_PlayerMotor motor;
 
+    [SerializeField]
+    private Transform weaponHolder;
+
     private Vector3 newWeaponRotation;
     private Vector3 newWeaponRotationVelocity;
 
@@ -21,6 +24,6 @@ public class scr_WeaponSway : MonoBehaviour {
 
         newWeaponRotation.x = Mathf.Clamp(newWeaponRotation.x, -scr_PlayerGlobals.swayClampX, scr_PlayerGlobals.swayClampX);
         newWeaponRotation.y = Mathf.Clamp(newWeaponRotation.y, -scr_PlayerGlobals.swayClampY, scr_PlayerGlobals.swayClampY);
-        transform.localRotation = Quaternion.Euler(newWeaponRotation);
+        weaponHolder.localRotation = Quaternion.Euler(newWeaponRotation);
     }
 }

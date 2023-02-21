@@ -23,7 +23,6 @@ public class scr_PlayerSetup : NetworkBehaviour {
             AssignRemoteLayer();
         } else {
             DisableSceneCamera();
-            GetComponent<scr_WeaponManager>().Setup();
         }
 
         playerUIInstance = Instantiate(playerUIPrefab, this.transform);

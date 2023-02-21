@@ -18,8 +18,6 @@ public class scr_PlayerShoot : NetworkBehaviour {
     private scr_WeaponManager weaponManager;
 
     private void Start() {
-        barrel = GameObject.Find("BarrelEnd").transform;
-        weaponSway = GetComponentInChildren<scr_WeaponSway>();
     }
 
     [Client]
