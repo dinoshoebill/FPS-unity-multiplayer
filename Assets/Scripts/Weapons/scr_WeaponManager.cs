@@ -13,12 +13,14 @@ public class scr_WeaponManager : NetworkBehaviour {
     private Transform weaponHolder;
 
     private void Start() {
-        weaponHolder = GameObject.Find("WeaponHolder").transform;
         currentWeapon = weaponHolder.GetChild(0).childCount > 0 ? weaponHolder.GetChild(0).GetChild(0).GetComponent<scr_Weapon>() : null;
         SelectWeapon();
     }
 
     private void SelectWeapon() {
+
+        if (!isLocalPlayer)
+            return;
 
         int i = 0;
 
@@ -65,7 +67,7 @@ public class scr_WeaponManager : NetworkBehaviour {
     }
 
     private void SetLayerRecursively() {
-        if (!currentWeapon)
+        if (!currentWeapon || !isLocalPlayer)
             return;
 
         LayerMask weaponLayer = LayerMask.NameToLayer(scr_PlayerGlobals.weaponLayer);

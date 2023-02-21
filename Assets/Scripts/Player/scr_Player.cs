@@ -44,6 +44,8 @@ public class scr_Player : NetworkBehaviour {
         input.Weapon.FireStart.started += e => shoot.Shoot();
 
         input.Weapon.WeaponSwitch.performed += e => weapon.SwitchWeapon(e.ReadValue<Vector2>().y);
+
+        input.Enable();
     }
 
     public void Setup() {
@@ -53,6 +55,7 @@ public class scr_Player : NetworkBehaviour {
             wasEnabled[i] = disableOnDeath[i].enabled;
         }
 
+        InitializeInputActions();
         SetPlayerSettings();
     }
 
@@ -72,6 +75,7 @@ public class scr_Player : NetworkBehaviour {
     }
 
     private void Die() {
+
         isDead = true;
 
         for (int i = 0; i < disableOnDeath.Length; i++) {
@@ -101,6 +105,7 @@ public class scr_Player : NetworkBehaviour {
         transform.position = spawnpoint.position;
         transform.rotation = spawnpoint.rotation;
         motor.player.enabled = true;
+
         SetPlayerSettings();
     }
 
@@ -116,16 +121,12 @@ public class scr_Player : NetworkBehaviour {
         var children = this.GetComponentsInChildren<Transform>(includeInactive: true);
 
         if (!isLocalPlayer)
-            foreach (var child in children) {
+            foreach (var child in children)
                 child.gameObject.layer = LayerMask.NameToLayer(scr_PlayerGlobals.remotePlayerLayer);
-            }
         else
-            foreach (var child in children) {
+            foreach (var child in children)
                 child.gameObject.layer = LayerMask.NameToLayer(scr_PlayerGlobals.localPlayerLayer);
-            }
-        
 
-        InitializeInputActions();
         input.Enable();
     }
 
