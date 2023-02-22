@@ -14,6 +14,7 @@ public class scr_WeaponSway : MonoBehaviour {
     private Vector3 targetWeaponRotation;
     private Vector3 targetWeaponRotationVelocity;
 
+    #region - Awake / Start / Update -
     private void Update() {
 
         targetWeaponRotation.y += scr_PlayerGlobals.swayAmount * motor.inputView.x * Time.deltaTime;
@@ -26,4 +27,5 @@ public class scr_WeaponSway : MonoBehaviour {
         newWeaponRotation.y = Mathf.Clamp(newWeaponRotation.y, -scr_PlayerGlobals.swayClampY, scr_PlayerGlobals.swayClampY);
         weaponHolder.localRotation = Quaternion.Euler(newWeaponRotation);
     }
+    #endregion
 }

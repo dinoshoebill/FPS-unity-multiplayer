@@ -12,8 +12,10 @@ public class scr_PlayerSetup : NetworkBehaviour {
 
     [SerializeField]
     private GameObject playerUIPrefab;
-    private GameObject playerUIInstance;
+    
+    public GameObject playerUIInstance;
 
+    #region - Awake / Start / Update
     private void Start() {
 
         sceneCamera = Camera.main;
@@ -30,7 +32,9 @@ public class scr_PlayerSetup : NetworkBehaviour {
 
         GetComponent<scr_Player>().Setup();
     }
+    #endregion
 
+    #region - Client Start -
     public override void OnStartClient() {
         base.OnStartClient();
 
@@ -39,7 +43,9 @@ public class scr_PlayerSetup : NetworkBehaviour {
 
         scr_GameManager.RegisterPlayer(id, player);
     }
+    #endregion
 
+    #region - Non Local Player -
     private void DisableSceneCamera() {
         if (sceneCamera != null) {
             sceneCamera.gameObject.SetActive(false);
@@ -49,12 +55,16 @@ public class scr_PlayerSetup : NetworkBehaviour {
     private void AssignRemoteLayer() {
         gameObject.layer = LayerMask.NameToLayer(scr_PlayerGlobals.remotePlayerLayer);
     }
+    #endregion
 
+    #region - Local Player -
     private void DisableComponents() {
         for (int i = 0; i < componentsToDisable.Length; i++)
             componentsToDisable[i].enabled = false;
     }
+    #endregion
 
+    #region - Enable / Disable -
     private void OnDisable() {
 
         Destroy(playerUIInstance);
@@ -64,4 +74,5 @@ public class scr_PlayerSetup : NetworkBehaviour {
 
         scr_GameManager.UnregisterPlayer(transform.name);
     }
+    #endregion
 }

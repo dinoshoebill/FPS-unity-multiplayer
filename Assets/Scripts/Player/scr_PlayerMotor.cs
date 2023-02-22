@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class scr_PlayerMotor : MonoBehaviour {
 
-    #region - Variables -
     public CharacterController player;
 
     [HideInInspector]
@@ -24,9 +23,8 @@ public class scr_PlayerMotor : MonoBehaviour {
 
     [Header("Player Camera")]
     [SerializeField] private Transform cameraHolder;
-    #endregion
 
-    #region - Awake / Update -
+    #region - Awake / Start / Update -
     private void Awake() {
         // player = GetComponent<CharacterController>();
         InitializePlayerSettings();
@@ -143,8 +141,10 @@ public class scr_PlayerMotor : MonoBehaviour {
     }
     #endregion
 
+    #region - Enable / Disable -
     private void OnEnable() {
         jumpingForce = -1f;
         player.Move(Vector3.zero);
     }
+    #endregion
 }

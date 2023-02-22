@@ -1,11 +1,12 @@
 using UnityEngine;
 using Mirror;
 
+[RequireComponent(typeof(scr_WeaponManager))]
 public class scr_PlayerShoot : NetworkBehaviour {
 
+    [SerializeField]
     private const string PLAYER_TAG = "Player";
 
-    [Header("Layer Mask")]
     [SerializeField] private LayerMask mask;
 
     [SerializeField]

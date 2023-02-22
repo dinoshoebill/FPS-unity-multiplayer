@@ -16,38 +16,13 @@ public class scr_Player : NetworkBehaviour {
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
 
+    #region - Awake / Start / Update
     private void Awake() {
         input = new PlayerInput();
     }
+    #endregion
 
-    private void InitializeInputActions() {
-
-        scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
-        scr_PlayerShoot shoot = GetComponent<scr_PlayerShoot>();
-        scr_WeaponManager weapon = GetComponent<scr_WeaponManager>();
-
-        input.Player.Movement.performed += e => 
-            motor.MovementInput(e.ReadValue<Vector2>());
-
-        input.Player.View.performed += e => 
-            motor.ViewInput(e.ReadValue<Vector2>());
-
-        input.Player.Jump.performed += e => 
-            motor.JumpInput(e);
-
-        input.Player.SprintingStart.started += e =>
-            motor.StartSprinting();
-
-        input.Player.SprintingStop.performed += e => 
-            motor.StopSprintingByRelease();
-
-        input.Weapon.FireStart.started += e => shoot.Shoot();
-
-        input.Weapon.WeaponSwitch.performed += e => weapon.SwitchWeapon(e.ReadValue<Vector2>().y);
-
-        input.Enable();
-    }
-
+    #region - Setup -
     public void Setup() {
         wasEnabled = new bool[disableOnDeath.Length];
 
@@ -58,7 +33,39 @@ public class scr_Player : NetworkBehaviour {
         InitializeInputActions();
         SetPlayerSettings();
     }
+    #endregion
 
+    #region - Input -
+    private void InitializeInputActions() {
+
+        scr_PlayerMotor motor = GetComponent<scr_PlayerMotor>();
+        scr_PlayerShoot shoot = GetComponent<scr_PlayerShoot>();
+        scr_WeaponManager weapon = GetComponent<scr_WeaponManager>();
+
+        input.Player.Movement.performed += e =>
+            motor.MovementInput(e.ReadValue<Vector2>());
+
+        input.Player.View.performed += e =>
+            motor.ViewInput(e.ReadValue<Vector2>());
+
+        input.Player.Jump.performed += e =>
+            motor.JumpInput(e);
+
+        input.Player.SprintingStart.started += e =>
+            motor.StartSprinting();
+
+        input.Player.SprintingStop.performed += e =>
+            motor.StopSprintingByRelease();
+
+        input.Weapon.FireStart.started += e => shoot.Shoot();
+
+        input.Weapon.WeaponSwitch.performed += e => weapon.SwitchWeapon(e.ReadValue<Vector2>().y);
+
+        input.Enable();
+    }
+    #endregion
+
+    #region - Damage -
     [ClientRpc]
     public void RpcTakeDamage(int damage) {
 
@@ -73,7 +80,9 @@ public class scr_Player : NetworkBehaviour {
             Die();
         }
     }
+    #endregion
 
+    #region - Die / Respawn -
     private void Die() {
 
         isDead = true;
@@ -108,7 +117,9 @@ public class scr_Player : NetworkBehaviour {
 
         SetPlayerSettings();
     }
+    #endregion
 
+    #region - Player Settings -
     public void SetPlayerSettings() {
 
         isDead = false;
@@ -129,6 +140,7 @@ public class scr_Player : NetworkBehaviour {
 
         input.Enable();
     }
+    #endregion
 
     public bool IsDead {
         get { return isDead;  }

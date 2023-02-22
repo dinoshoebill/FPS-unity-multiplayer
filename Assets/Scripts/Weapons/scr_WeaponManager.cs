@@ -12,11 +12,14 @@ public class scr_WeaponManager : NetworkBehaviour {
     [SerializeField]
     private Transform weaponHolder;
 
+    #region - Awake / Start / Update -
     private void Start() {
         currentWeapon = weaponHolder.GetChild(0).childCount > 0 ? weaponHolder.GetChild(0).GetChild(0).GetComponent<scr_Weapon>() : null;
         SelectWeapon();
     }
+    #endregion
 
+    #region - Weapon Switching -
     private void SelectWeapon() {
 
         if (!isLocalPlayer)
@@ -65,7 +68,9 @@ public class scr_WeaponManager : NetworkBehaviour {
 
         SelectWeapon();
     }
+    #endregion
 
+    #region - Weapon Layer -
     private void SetLayerRecursively() {
         if (!currentWeapon || !isLocalPlayer)
             return;
@@ -78,4 +83,5 @@ public class scr_WeaponManager : NetworkBehaviour {
             }
         }
     }
+    #endregion
 }
